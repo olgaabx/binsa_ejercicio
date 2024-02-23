@@ -1,4 +1,3 @@
-// import React, { useEffect, useState } from 'react'
 import {
   Table,
   TableBody,
@@ -7,20 +6,30 @@ import {
   TableHead,
   TableRow,
   Paper,
+  IconButton,
 } from '@mui/material'
 import { ClientModel } from '../models/ClientModel'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import ContactIcon from '@mui/icons-material/ContactMail'
+import React from 'react'
 
-type ClientProps = {
+type ClientsRegisterProps = {
   clients: ClientModel[]
+  setSelectedClient: (client: ClientModel) => void
+  onDeleteClick: (client: ClientModel) => void
+  onContactClick: (client: ClientModel) => void
 }
 
-export const ClientsRegister: React.FC<ClientProps> = ({ clients }) => {
-
-  console.log(clients)
-
+export const ClientsRegister: React.FC<ClientsRegisterProps> = ({
+  clients,
+  setSelectedClient,
+  onDeleteClick,
+  onContactClick,
+}) => {
   return (
     <TableContainer component={Paper}>
-      <Table style={{ minWidth: 650 }} aria-label="Tabla de Registros">
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
@@ -31,16 +40,24 @@ export const ClientsRegister: React.FC<ClientProps> = ({ clients }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {clients.map((client, index) => (
-            <TableRow
-              key={index}
-              style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : 'white' }}
-            >
+          {clients.map((client) => (
+            <TableRow key={client.id}>
               <TableCell>{client.id}</TableCell>
-              <TableCell>{client.data.nombre}</TableCell>
-              <TableCell>{client.data.domicilio}</TableCell>
-              <TableCell>{client.data.codigoPostal}</TableCell>
-              <TableCell>{client.data.poblacion}</TableCell>
+              <TableCell>{client?.data?.nombre}</TableCell>
+              <TableCell>{client?.data?.domicilio}</TableCell>
+              <TableCell>{client?.data?.codigoPostal}</TableCell>
+              <TableCell>{client?.data?.poblacion}</TableCell>
+              <TableCell>
+                <IconButton color="inherit" onClick={() => setSelectedClient(client)}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton color="inherit" onClick={() => onDeleteClick(client)}>
+                  <DeleteIcon />
+                </IconButton>
+                <IconButton onClick={() => onContactClick(client)}>
+                  <ContactIcon />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

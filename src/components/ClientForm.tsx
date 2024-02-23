@@ -13,14 +13,6 @@ import {
 } from 'firebase/firestore'
 import { db } from '../services/firebase'
 
-export type ClientData = {
-  // id: number | string
-  nombre: string
-  domicilio?: string
-  codigoPostal?: string
-  poblacion?: string
-}
-
 type ClientFormProps = {
   open: boolean
   onClose: () => void
@@ -54,13 +46,9 @@ export const ClientForm: React.FC<ClientFormProps> = ({ open, onClose }) => {
         data
       })
       formMethods.reset()
-      // onAddClient(data)
     } catch (e) {
       console.error(e)
     }
-
-    console.log(data)
-
     onClose()
   }
 
@@ -69,14 +57,6 @@ export const ClientForm: React.FC<ClientFormProps> = ({ open, onClose }) => {
       <DialogTitle>Nuevo Cliente</DialogTitle>
       <DialogContent>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* <TextField
-            label="ID"
-            type="text"
-            {...register('id', { valueAsNumber: true, value: '0000X' })}
-            InputProps={{ readOnly: true }}
-            fullWidth
-          /> */}
-
           <TextField
             label="Nombre"
             type="text"

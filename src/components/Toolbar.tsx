@@ -1,64 +1,24 @@
 import React from 'react'
-import {
-  Toolbar as MuiToolbar,
-  IconButton,
-  Tooltip,
-  Typography,
-  Container,
-} from '@mui/material'
+import { AppBar, Toolbar, IconButton, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
-import ContactIcon from '@mui/icons-material/ContactMail'
 
-interface ToolbarProps {
+type ClientsToolbarProps = {
   onAddClick: () => void
-  // onEditClick: () => void
-  onDeleteClick: () => void
-  // onContactClick: () => void
-  onViewContactClick: () => void
 }
 
-export const Toolbar: React.FC<ToolbarProps> = ({ onAddClick, onDeleteClick, onViewContactClick }) =>
-  {    
-    return (
-      <Container maxWidth="xl">
-        <MuiToolbar style={{ width: '100%' }}>
-          <Tooltip title="Nuevo">
-            <IconButton
-              onClick={onAddClick}
-            >
-              <AddIcon />
-              <Typography variant="caption">Nuevo</Typography>
-            </IconButton>
-          </Tooltip>
-
-          <Tooltip title="Editar">
-            <IconButton
-            // onClick={onEditClick}
-            >
-              <EditIcon />
-              <Typography variant="caption">Editar</Typography>
-            </IconButton>
-          </Tooltip>
-
-          <Tooltip title="Eliminar">
-            <IconButton
-            onClick={onDeleteClick}
-            >
-              <DeleteIcon />
-              <Typography variant="caption">Eliminar</Typography>
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Contacto">
-            <IconButton
-              onClick={onViewContactClick}
-            >
-              <ContactIcon />
-              <Typography variant="caption">Ver contacto</Typography>
-            </IconButton>
-          </Tooltip>
-        </MuiToolbar>
-      </Container>
-    )
-  }
+export const ClientsToolbar: React.FC<ClientsToolbarProps> = ({
+  onAddClick
+}) => {
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Clientes
+        </Typography>
+        <IconButton color="inherit" onClick={onAddClick}>
+          <AddIcon />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
+  )
+}

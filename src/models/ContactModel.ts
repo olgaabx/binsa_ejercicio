@@ -1,6 +1,6 @@
 export type ContactModel = {
-  id: number
-  clientId: number
+  id: string
+  clientId: string
   nombre: string
   telefono: string
   email: string
